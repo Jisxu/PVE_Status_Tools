@@ -74,7 +74,7 @@ pveVersionJudge() {
 pveSoftSource_menu() {
     pveSoftSource() {
 		local domian_url="$1"
-        echo "deb "https://${domian_url}" bullseye pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
+        echo "deb "https://${domian_url}" bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
         echoContent green " ---> 更换 Proxmox 软件源完成"
 
         # 删除 Proxmox 企业源
@@ -83,7 +83,7 @@ pveSoftSource_menu() {
     	    echoContent green " ---> 删除 Proxmox 企业源完成"
         fi
 
-        wget -qc -t 5 https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg		
+        wget -qc -t 5 https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg		
     }
     while :
     do
@@ -126,14 +126,14 @@ pveDebianSource_menu() {
     pveDebianSource() {
 		local domian_url="$1"
         cat >/etc/apt/sources.list<<EOF
-deb https://${domian_url}/debian/ bullseye main contrib non-free
-deb https://${domian_url}/debian/ bullseye-updates main contrib non-free
-deb https://${domian_url}/debian/ bullseye-backports main contrib non-free
-deb https://${domian_url}/debian-security bullseye-security main contrib non-free
-deb-src https://${domian_url}/debian/ bullseye main contrib non-free
-deb-src https://${domian_url}/debian/ bullseye-updates main contrib non-free
-deb-src https://${domian_url}/debian/ bullseye-backports main contrib non-free
-deb-src https://${domian_url}/debian-security bullseye-security main contrib non-free
+deb https://${domian_url}/debian/ bookworm main contrib non-free non-free-firmware
+deb https://${domian_url}/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb https://${domian_url}/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb https://${domian_url}/debian-security bookworm-security main contrib non-free non-free-firmware
+deb-src https://${domian_url}/debian/ bookworm main contrib non-free non-free-firmware
+deb-src https://${domian_url}/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb-src https://${domian_url}/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb-src https://${domian_url}/debian-security bookworm-security main contrib non-free non-free-firmware
 EOF
         echoContent green " ---> 更换 Proxmox Debian 源完成"
 	}
@@ -329,7 +329,7 @@ EOF
     # 更换 Proxmox 软件源
 	echoContent skyBlue "\n进度  2/${totalProgress} : 更换 Proxmox 软件源为中科大源\n"
     domian_url="mirrors.ustc.edu.cn"
-    echo "deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
+    echo "deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
     echoContent green " ---> 更换 Proxmox 软件源完成"
 
     # 删除 Proxmox 企业源
@@ -337,19 +337,19 @@ EOF
         rm -rf /etc/apt/sources.list.d/pve-enterprise.list
     fi
 
-    wget -qc -t 5 https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+    wget -qc -t 5 https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg
 
     # 更换 Proxmox Debian 源
 	echoContent skyBlue "\n进度  3/${totalProgress} : 更换 Proxmox Debian 源"
     cat >/etc/apt/sources.list<<EOF
-deb https://$domian_url/debian/ bullseye main contrib non-free
-deb https://$domian_url/debian/ bullseye-updates main contrib non-free
-deb https://$domian_url/debian/ bullseye-backports main contrib non-free
-deb https://$domian_url/debian-security bullseye-security main contrib non-free
-deb-src https://$domian_url/debian/ bullseye main contrib non-free
-deb-src https://$domian_url/debian/ bullseye-updates main contrib non-free
-deb-src https://$domian_url/debian/ bullseye-backports main contrib non-free
-deb-src https://$domian_url/debian-security bullseye-security main contrib non-free
+deb https://$domian_url/debian/ bookworm main contrib non-free non-free-firmware
+deb https://$domian_url/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb https://$domian_url/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb https://$domian_url/debian-security bookworm-security main contrib non-free non-free-firmware
+deb-src https://$domian_url/debian/ bookworm main contrib non-free non-free-firmware
+deb-src https://$domian_url/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb-src https://$domian_url/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb-src https://$domian_url/debian-security bookworm-security main contrib non-free non-free-firmware
 EOF
     echoContent green " ---> 更换 Proxmox Debian 源完成"
 
